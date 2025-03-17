@@ -14,18 +14,29 @@ int search(int* nums, int numsSize, int target) {
         // printf("cur num %d, numssize %d found, center %d\n", nums[center], numsSize, center);
         return center;
     }
-    int left = search(nums, center, target);
-    // printf("after recursive cur num %d, left %d, right %d \n", nums[center], left, right);
-    if (left!=-1){
-        left = left;
-        // printf("left return idx %d \n",left);
-        return left;
+    else if(nums[center]>target){
+        int left = search(nums, center, target);
+        if (left!=-1)
+            return left;
+        else 
+            return -1;
     }
-    int right = search(nums+center+1, numsSize-center-1, target);
-    if (right!=-1){
-        right = right+center+1;
-        return right;
+    else if(nums[center]<target){
+        int right = search(nums+center+1, numsSize-center-1, target);
+        if (right!=-1){
+            right = right+center+1;
+            return right;
+        }
+        else 
+            return -1;
+
     }
-    else 
-        return -1;
+    // int right = search(nums+center+1, numsSize-center-1, target);
+    // if (right!=-1){
+    //     right = right+center+1;
+    //     return right;
+    // }
+    // else 
+    //     return -1;
+    return -1;
 }
